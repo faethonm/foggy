@@ -12,4 +12,9 @@
 class List < ActiveRecord::Base
   belongs_to :user
   validates :name,  presence: true
+
+  scope :search, -> (query) {
+    search_query = "%#{query}%"
+    where("lists.name like ?", search_query)
+  }
 end
