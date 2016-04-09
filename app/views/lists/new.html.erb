@@ -1,17 +1,24 @@
-<h2>New list</h2>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@list) do |f| %>
-
-      <div class="input-field col s6">
-        <%= f.label :name ,class: "validate" %><br />
-        <%= f.text_field :name, autofocus: true %>
+<div class="container">
+  <h2 class="row center">New list</h2>
+  <div class="card">
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <%= form_for(@list) do |f| %>
+          <div class="row">
+            <div class="input-field">
+              <%= f.label :name ,class: "validate" %><br />
+              <%= f.text_field :name, autofocus: true %>
+            </div>
+          </div>
+          <div class="card-action center">
+            <button class="btn waves-effect waves-light">
+              <%= f.submit "Create list" do %>
+              <i class="material-icons right">plus</i>
+              <% end %>
+            </button>
+          </div>
+        <% end %>
       </div>
-
-      <div class="actions">
-        <%= f.submit "Sign up" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -13,7 +13,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = current_user.new(list_params)
+    @list = current_user.lists.create(list_params)
     if @list.save
       redirect_to @list
     else
