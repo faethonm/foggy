@@ -14,7 +14,7 @@ class List < ActiveRecord::Base
   validates :name,  presence: true
 
   scope :search, -> (query) {
-    search_query = "%#{query}%"
+    search_query = "%#{query.downcase}%"
     where("lists.name like ?", search_query)
   }
 end
