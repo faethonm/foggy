@@ -15,6 +15,7 @@ gem 'devise'
 gem 'figaro'
 gem 'rails_12factor'
 gem 'annotate'
+gem "administrate", "~> 0.1.5"
 
 group :development do
   gem 'web-console', '~> 2.0'
