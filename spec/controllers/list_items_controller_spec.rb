@@ -1,19 +1,20 @@
 # == Schema Information
 #
-# Table name: lists
+# Table name: list_items
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  user_id    :integer
+#  list_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_lists_on_user_id  (user_id)
+#  index_list_items_on_list_id  (list_id)
 #
 
 require 'rails_helper'
 
-RSpec.describe ListsController, type: :controller do
+RSpec.describe ListItemsController, type: :controller do
+
 end

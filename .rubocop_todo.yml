@@ -25,6 +25,9 @@ Style/ClassCheck:
 Metrics/ClassLength:
   Max: 1000
 
+Style/Lambda:
+  Enabled: false
+
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/CommentIndentation:

@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20160409193432) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
