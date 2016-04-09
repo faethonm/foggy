@@ -32,7 +32,6 @@ class List < ActiveRecord::Base
   end
 
   private
-
   def downcase_name
     self.name = name.downcase
   end
