@@ -21,6 +21,7 @@ group :development do
   gem 'spring'
   gem 'sqlite3'
   gem 'awesome_print'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
