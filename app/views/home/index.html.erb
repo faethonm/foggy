@@ -1,0 +1,75 @@
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center  pink-text">Foggy</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Worrying about the little things for you</h5>
+      </div>
+      <div class="row center">
+        <% if user_signed_in? %>
+          Hi <%= current_user.email %>
+          You are now logged in<br/>
+          <section>
+          <%= link_to "Create a new list", new_list_path, class: "btn-large waves-effect waves-light pink" %>
+          <%= link_to "View lists", lists_path, class: "btn-large waves-effect waves-light pink" %>
+          </section>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path, class: "btn-large waves-effect waves-light pink" %>
+        <% end %>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Testing</h5>
+
+            <ul class="center">
+              <li>Rspec </li>
+              <li>Guard </li>
+              <li>FFaker </li>
+              <li>FactoryGirl </li>
+              <li>Shoulda matchers </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Authentication</h5>
+
+            <ul class="center">
+             <li>Devise </li>
+             </ul>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Focus on your implementation</h5>
+
+            <ul class="center">
+              <li> 100% code coverage</li>
+              <li> 100% test passed</li>
+              <li> Fully configurable</li>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
