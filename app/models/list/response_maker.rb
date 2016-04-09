@@ -12,7 +12,7 @@ class List
 
     def initialize(query, user)
       @query = query
-      @user  = user || default_user
+      @user  = user.presence || default_user
     end
 
     def run
@@ -27,7 +27,7 @@ class List
 
     private
     def run_query
-      List.for_user(user).search(query)
+      List.for_user(default_user).search(query)
     end
 
     def recommend_for_query
@@ -35,7 +35,7 @@ class List
     end
 
     def default_user
-      "james@foggy.io"
+      "james"
     end
 
     def recommended_response

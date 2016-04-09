@@ -23,12 +23,12 @@ class List < ActiveRecord::Base
     where('lists.name like ?', "%#{query.try(:downcase) || ''}%")
   }
 
-  scope :for_user, -> (email) {
-    joins(:user).where('users.email = ?', email)
+  scope :for_user, -> (name) {
+    joins(:user).where('users.name = ?', name.downcase)
   }
 
-  scope :not_for_user, -> (email) do
-    joins(:user).where('users.email != ?', email)
+  scope :not_for_user, -> (name) do
+    joins(:user).where('users.name != ?', name.downcase)
   end
 
   private
