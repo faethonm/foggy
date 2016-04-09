@@ -55,7 +55,7 @@ class List
     def recommended_text
       "".tap do |response|
         response << "You don't have a list for #{query}, "
-        response << "but I found some from #{recommend_for_query.map(&:user).first.try(&:name)}."
+        response << "but I found some from #{recommend_for_query.map(&:user).first.try(&:name)}. "
         response << "Do you want to see what they have?"
       end
     end
