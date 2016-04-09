@@ -1,8 +1,7 @@
 class Api::ListsController < ApiController
   def index
-    @lists = List.search params[:q]
     respond_to do |format|
-      format.json { render json: @lists.to_json }
+      format.json { render text: List::ResponseMaker.new(params[:q]).run }
     end
   end
 end

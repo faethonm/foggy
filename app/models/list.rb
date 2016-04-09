@@ -12,9 +12,18 @@
 class List < ActiveRecord::Base
   belongs_to :user
   validates :name,  presence: true
+  has_many :list_items
 
   scope :search, -> (query) {
-    search_query = "%#{query.downcase}%"
+    search_query = "%#{query.try(:downcase) || ''}%"
     where("lists.name like ?", search_query)
+  }
+
+  scope :for_user, -> (email) {
+    joins(:user).where("users.email = ?", email)
+  }
+
+  scope :not_for_user, -> (email) {
+    joins(:user).where("users.email != ?", email)
   }
 end
