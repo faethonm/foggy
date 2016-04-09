@@ -1,18 +1,18 @@
 class List
   class ResponseMaker
-    attr_reader :query, :user
+    attr_reader :query
 
     STATUSES = {
       found: "FOUND",
       recommended: "RECOMMENDED",
       found_friend: "FOUND_FRIEND",
       created: "CREATED",
-      not_found: "NOT_FOUND"
+      not_found: "NOT_FOUND",
+      show_found: "SHOW_FOUND"
     }.freeze
 
-    def initialize(query, user)
+    def initialize(query)
       @query = query
-      @user  = user.presence || default_user
     end
 
     def run
@@ -25,13 +25,17 @@ class List
       end
     end
 
+    def show(list)
+      show_response(list)
+    end
+
     private
     def run_query
       List.for_user(default_user).search(query)
     end
 
     def recommend_for_query
-      List.not_for_user(user).search(query)
+      List.not_for_user(default_user).search(query)
     end
 
     def default_user
@@ -41,7 +45,8 @@ class List
     def recommended_response
       {
         text: recommended_text,
-        status: STATUSES[:recommended]
+        status: STATUSES[:recommended],
+        id: recommend_for_query.first.id
       }
     end
 
@@ -55,7 +60,7 @@ class List
     def recommended_text
       "".tap do |response|
         response << "You don't have a list for #{query}, "
-        response << "but I found some from #{recommend_for_query.map(&:user).first.try(&:name)}. "
+        response << "but I found some from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
         response << "Do you want to see what they have?"
       end
     end
@@ -71,6 +76,20 @@ class List
       "".tap do |response|
         response << "I found a list for you. "
         response << "Here are the items: #{run_query.first.list_items.map(&:name).join(', ')}"
+      end
+    end
+
+    def show_response(list)
+      {
+        text: show_text(list),
+        status: STATUSES[:show_found]
+      }
+    end
+
+    def show_text(list)
+      "".tap do |response|
+        response << "The list for #{list.user.try(:name).try(:capitalize)} contains "
+        response << list.list_items.map(&:name).join(", ")
       end
     end
   end
