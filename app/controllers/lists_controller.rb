@@ -16,10 +16,12 @@
 class ListsController < ApplicationController
   def index
     @lists = List.all
+    @list_item = ListItem.new
   end
 
   def show
     @list = List.find(params[:id])
+    @list_item = ListItem.new
   end
 
   def new

@@ -3,12 +3,12 @@ class List
     attr_reader :query
 
     STATUSES = {
-      found: "FOUND",
-      recommended: "RECOMMENDED",
-      found_friend: "FOUND_FRIEND",
-      created: "CREATED",
-      not_found: "NOT_FOUND",
-      show_found: "SHOW_FOUND"
+      found: 'FOUND',
+      recommended: 'RECOMMENDED',
+      found_friend: 'FOUND_FRIEND',
+      created: 'CREATED',
+      not_found: 'NOT_FOUND',
+      show_found: 'SHOW_FOUND'
     }.freeze
 
     def initialize(query)
@@ -30,6 +30,7 @@ class List
     end
 
     private
+
     def run_query
       List.for_user(default_user).search(query)
     end
@@ -39,7 +40,7 @@ class List
     end
 
     def default_user
-      "james"
+      'james'
     end
 
     def recommended_response
@@ -58,10 +59,10 @@ class List
     end
 
     def recommended_text
-      "".tap do |response|
+      ''.tap do |response|
         response << "You don't have a list for #{query}, "
         response << "but I found one from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
-        response << "Do you want to see what they have?"
+        response << 'Do you want to see what they have?'
       end
     end
 
@@ -74,8 +75,8 @@ class List
     end
 
     def found_text
-      "".tap do |response|
-        response << "I found a list for you. "
+      ''.tap do |response|
+        response << 'I found a list for you. '
         response << "Here are the items: #{run_query.first.list_items.map(&:name).join(', ')}"
       end
     end
