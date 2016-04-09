@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :list_item do
-    name "MyString"
+    name 'MyString'
     list nil
   end
 end
