@@ -4,7 +4,11 @@ module Response
   def list_found_text(run_query)
     ''.tap do |response|
       response << "Here are the items on #{run_query.first.try(:name)}: "
-      response << "#{run_query.first.list_items.map(&:name).join(', ')}"
+      response << "#{run_query.first.list_items.map(&:name).join(', ')}. "
+      if run_query.first.list_items.items_in_basket.any?
+        response << "You still need to buy "
+        response << run_query.first.list_items.items_in_basket.map(&:name).join(', ')
+      end
     end
   end
 
