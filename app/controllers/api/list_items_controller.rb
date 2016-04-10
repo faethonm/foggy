@@ -1,12 +1,18 @@
 class Api::ListItemsController < ApiController
   skip_before_filter :verify_authenticity_token
   def create
-    list = current_user.lists.find_by(name: params[:list_name])
-
-    list_item = list.list_items.create!(name: params[:item_name])
+    if list = current_user.lists.find_by(name: params[:list_name])
+      list_item = list.list_items.create!(name: params[:item_name])
+      response = create_response(list_item)
+    else
+      response = {
+        text: "I couldn't find #{params[:list_name]} for James. Would you like to create one?",
+        status: "NOT_FOUND"
+      }
+    end
 
     respond_to do |format|
-      format.json { render json: create_response(list_item) }
+      format.json { render json: response }
     end
   end
 
@@ -15,18 +21,21 @@ class Api::ListItemsController < ApiController
       if list_item = list.list_items.find_by(name: params[:item_name])
         list_item.update_attributes!(in_basket: true)
 
-        respond_to do |format|
-          format.json { render json: add_to_basket_response(list_item), status: :created }
-        end
+        response = add_to_basket_response(list_item)
       else
-        respond_to do |format|
-          format.json { render json: {text: "I couldn't find #{params[:item_name]} in your #{params[:list_name]} list"} }
-        end
+        response = {
+          text: "I couldn't find #{params[:item_name]} in your #{params[:list_name]} list"
+        }
       end
     else
-      respond_to do |format|
-        format.json { render json: did_not_find, status: :not_found }
-      end
+      response = {
+        text: "I couldn't find a #{params[:list_name]} list for James. Would you like to create one?",
+        status: "NOT_FOUND"
+      }
+    end
+
+    respond_to do |format|
+      format.json { render json: response }
     end
   end
 
@@ -44,14 +53,6 @@ class Api::ListItemsController < ApiController
       text: Response.add_to_basket_text(list_item),
       status: "ADDED_TO_BASKET",
       id: list_item.list.id
-    }
-  end
-
-  def did_not_find
-    {
-      text: "I couldn't find a #{params[:list_name]} list for James. Would you like to create one?",
-      status: "NOT_FOUND",
-      id: 0
     }
   end
 end
