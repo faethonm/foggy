@@ -15,9 +15,18 @@ class Api::ListsController < ApiController
 
   def create
     user = User.find_by(email: "james@foggy.io")
-    list = List.create!(name: params[:list_name], user: user)
+    list = List.create(name: params[:list_name], user: user)
+    if list.valid?
+      response = create_response(list)
+    else
+      response = {
+        text: "You aready have a #{params[:list_name]} list for James.",
+        status: "LIST_EXISTS",
+        id: List.find_by(name: params[:list_name])
+      }
+    end
     respond_to do |format|
-      format.json { render json: create_response(list) }
+      format.json { render json: response }
     end
   end
 
