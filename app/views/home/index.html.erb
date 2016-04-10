@@ -8,7 +8,13 @@
       <div class="row center">
         <% if user_signed_in? %>
           Hi <%= current_user.email %>
-          You are now logged in<br/>
+          <div class="container">
+            <div class="search-bar col s12">
+              <%= form_tag(lists_path, method: :get) do %>
+                <%= text_field_tag(:q, params[:q], class: "form-control", placeholder: "search..") %>
+              <% end %>
+            </div>
+          </div>
           <section>
           <%= link_to "Create a new list", new_list_path, class: "btn-large waves-effect waves-light green" %>
           <%= link_to "View lists", lists_path, class: "btn-large waves-effect waves-light green" %>
@@ -60,3 +66,11 @@
 
     </div>
   </div>
+<script>
+  init: function() {
+    var things_to_do = ['go to the gym', 'cook a healthy meal', 'improve myself',
+                        'run a mile a day', 'write some code', 'quit smoking',
+                        'write a blog', 'build my confidence', 'do a good deed'];
+    typeout('.challenge_search_text', things_to_do, {numLoops: 10, interval: 1000});
+  }
+</script>

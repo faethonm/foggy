@@ -1,6 +1,10 @@
 <li id="list-<%= list.id %>">
   <div class="col s6">
-    <div class="card">
+    <% if list.user == current_user %>
+      <div class="card green lighten-5">
+    <%else %>
+      <div class="card red lighten-5">
+      <%end %>
       <div class="card-content">
         <div class="card-title">
           <span><%= list.name %></span>
@@ -11,8 +15,11 @@
         </ul>
         <div class="card-action">
           <%= link_to 'View', list, class: "btn waves-effect waves-light" %>
-              <button data-target="add_item" class="btn modal-trigger">Add Item</button>
-              </div>
+          <button data-target="add_item" class="btn modal-trigger">Add Item</button>
+          <% if current_user != list.user %>
+            <%= link_to 'Copy', copy_list_path(list), class: "btn waves-effect waves-light" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

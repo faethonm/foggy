@@ -18,8 +18,20 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @lists = current_user.lists.order(created_at: :desc)
-    @list_item = ListItem.new
+    if params[:q]
+      search_param = "%#{params[:q]}%"
+      @lists = List
+        .where("name like ?", search_param).all.order(:user_id).order(created_at: :desc)
+      @list_item = ListItem.new
+      respond_to do |format|
+        format.html
+      end
+
+    else
+      @lists = current_user.lists.order(:user_id).order(created_at: :desc)
+      @list_item = ListItem.new
+    end
+    
   end
 
   def show
@@ -31,6 +43,12 @@ class ListsController < ApplicationController
     @list = List.new
   end
 
+  def destroy
+    debugger
+    @list.destroy
+    redirect_to request.referrer || root_url
+  end
+
   def create
     @list = current_user.lists.create(list_params)
     @list_items = @list_items
@@ -39,6 +57,13 @@ class ListsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def copy
+    current_list = List.find(params[:id])
+    @list = current_list.dup
+    @list.update_attributes!(user: current_user)
+    redirect_to lists_path
   end
 
   private
