@@ -52,7 +52,7 @@ class List
 
     def none_response
       {
-        text: "I couldn't find a list for you or recommend you something. Do you want to create one?",
+        text: "I couldn't find any lists for you. Do you want to create a new one?",
         status: STATUSES[:not_found]
       }
     end
