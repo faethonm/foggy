@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :lists do
     member do
+      get :copy
       resource :list_items do
         member do
           get :add_to_basket
