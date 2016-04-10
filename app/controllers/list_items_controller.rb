@@ -7,6 +7,7 @@
 #  list_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  in_basket  :boolean
 #
 # Indexes
 #
@@ -26,6 +27,14 @@ class ListItemsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @list_item.destroy
+    redirect_to request.referrer
+  end
+
+  def add_to_basket
   end
 
   private

@@ -18,7 +18,12 @@ Rails.application.routes.draw do
 
   resources :lists do
     member do
-      resource :list_items
+      resource :list_items do 
+        member do
+          get :add_to_basket
+        end
+      end
     end
   end
+
 end

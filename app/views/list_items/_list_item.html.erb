@@ -1,3 +1,9 @@
 <li id="list_item-<%= list_item.id %>" class="collection-item">
   <%= list_item.name %>
+  <%= current_user == list_item.list.user %>
+  
+  <% if current_user == list_item.list.user %>
+    <%= link_to 'add to basket', add_to_basket_list_items_path(list_item) %>
+  <% end %>
+
 </li>

@@ -23,7 +23,7 @@
     <%= form_for(@list_item, html: { multipart: true}) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <div class='field'>
-        <%= f.text_field :name, placeholder: 'Add new item...' %>
+        <%= f.text_field :name, placeholder: 'Add new item...', autofocus: true %>
       </div>
       <div class="modal-footer">
         <%= f.submit 'Add',  class: "modal-action modal-close waves-effect waves-green btn-flat " %>

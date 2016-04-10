@@ -7,6 +7,7 @@
 #  list_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  in_basket  :boolean
 #
 # Indexes
 #
