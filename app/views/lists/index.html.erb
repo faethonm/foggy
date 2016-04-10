@@ -1,3 +1,6 @@
 <ul class="lists">
-  <%= render @lists %>
+  <% lists.each do |list| %>
+    <%= sync partial: 'list', resource: @list %>
+  <% end %>
 </ul>
+
