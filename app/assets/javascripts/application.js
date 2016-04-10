@@ -15,11 +15,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require sync
-//= require_tree .
-
-init: function() {
-    var things_to_do = ['go to the gym', 'cook a healthy meal', 'improve myself',
-                        'run a mile a day', 'write some code', 'quit smoking',
-                        'write a blog', 'build my confidence', 'do a good deed'];
-    typeout('.challenge_search_text', things_to_do, {numLoops: 10, interval: 1000});
-  }
+//= require_tree .\
