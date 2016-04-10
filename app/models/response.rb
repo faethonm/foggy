@@ -27,4 +27,16 @@ module Response
       response << '. Would you like a copy of this list?'
     end
   end
+
+  def static_text
+    'Hello James!'
+  end
+
+  def list_create_text(list)
+    "I've created the #{list.name} list for you. To add an item say add item x to #{list.name} list"
+  end
+
+  def list_item_create_text(list_item)
+    "I've added #{list_item.name} to #{list_item.list.name}."
+  end
 end

@@ -32,8 +32,8 @@ class Api::ListsController < ApiController
   private
   def create_response(list)
     {
-      text: "I've created the #{list.name} list for you. To add an item say add item x to #{list.name} list",
-      status: "CREATED_LIST",
+      text: Response.list_create_text(list),
+      status: 'CREATED_LIST',
       id: list.id
     }
   end
