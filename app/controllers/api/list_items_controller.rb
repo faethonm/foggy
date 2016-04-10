@@ -13,7 +13,7 @@ class Api::ListItemsController < ApiController
   private
   def create_response(list_item)
     {
-      text: "I've added #{list_item.name} to #{list_item.list.name}.",
+      text: Response.list_item_create_text(list_item),
       status: "CREATED_LIST_ITEM",
       id: list_item.list.id
     }

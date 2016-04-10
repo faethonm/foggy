@@ -43,9 +43,17 @@ class List
       'james'
     end
 
+    def found_response
+      {
+        text: Response.list_found_text(run_query),
+        status: STATUSES[:found],
+        id: run_query.first.id
+      }
+    end
+
     def recommended_response
       {
-        text: recommended_text,
+        text: Response.recommended_text(query, recommend_for_query),
         status: STATUSES[:recommended],
         id: recommend_for_query.first.id
       }
@@ -53,48 +61,17 @@ class List
 
     def none_response
       {
-        text: "I couldn't find any lists for you. Do you want to create a new one?",
+        text: Response.none_text,
         status: STATUSES[:not_found]
       }
     end
 
-    def recommended_text
-      ''.tap do |response|
-        response << "You don't have a list for #{query}, "
-        response << "but I found one from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
-        response << 'Do you want to see what they have?'
-      end
-    end
-
-    def found_response
-      {
-        text: found_text,
-        status: STATUSES[:found],
-        id: run_query.first.id
-      }
-    end
-
-    def found_text
-      ''.tap do |response|
-        response << 'I found a list for you. '
-        response << "Here are the items: #{run_query.first.list_items.map(&:name).join(', ')}"
-      end
-    end
-
     def show_response(list)
       {
-        text: show_text(list),
+        text: Response.show_text(list),
         status: STATUSES[:show_found],
         id: list.id
       }
-    end
-
-    def show_text(list)
-      "".tap do |response|
-        response << "The list for #{list.user.try(:name).try(:capitalize)} contains "
-        response << list.list_items.map(&:name).join(", ")
-        response << ". Would you like a copy of this list?"
-      end
     end
   end
 end
