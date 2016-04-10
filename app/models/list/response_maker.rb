@@ -83,7 +83,8 @@ class List
     def show_response(list)
       {
         text: show_text(list),
-        status: STATUSES[:show_found]
+        status: STATUSES[:show_found],
+        id: list.id
       }
     end
 

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :static, only: [:index]
-    resources :lists, only: [:index, :show]
+    resources :lists, only: [:index, :show, :update]
   end
 
   resources :lists do
