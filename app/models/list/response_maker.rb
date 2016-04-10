@@ -68,7 +68,8 @@ class List
     def found_response
       {
         text: found_text,
-        status: STATUSES[:found]
+        status: STATUSES[:found],
+        id: run_query.first.id
       }
     end
 
