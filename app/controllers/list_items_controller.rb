@@ -14,21 +14,15 @@
 #
 
 class ListItemsController < ApplicationController
-
-  # def show
-  #   @list_item = ListItem.find(params[:id])
-  # end
-
   def new
-    debugger
     @list_item = ListItem.new
   end
 
   def create
     @list = List.find(params[:id])
-    @list_item = @list.list_items.create(list_items_params)
+    @list_item = @list.list_items.create(list_item_params)
     if @list_item.save
-      redirect_to @list_item
+      redirect_to @list
     else
       render 'new'
     end
