@@ -24,7 +24,8 @@ class Api::ListItemsController < ApiController
         response = add_to_basket_response(list_item)
       else
         response = {
-          text: "I couldn't find #{params[:item_name]} in your #{params[:list_name]} list"
+          text: "I couldn't find #{params[:item_name]} in your #{params[:list_name]} list",
+          status: "ITEM_NOT_FOUND"
         }
       end
     else
