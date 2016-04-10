@@ -2,8 +2,15 @@ class Api::ListItemsController < ApiController
   skip_before_filter :verify_authenticity_token
   def create
     if list = current_user.lists.find_by(name: params[:list_name])
-      list_item = list.list_items.create!(name: params[:item_name])
-      response = create_response(list_item)
+      list_item = list.list_items.create(name: params[:item_name])
+      if list_item.valid?
+        response = create_response(list_item)
+      else
+        response = {
+          text: "#{params[:item_name]} is already in your #{params[:list_name]} list.",
+          status: "ITEM_EXISTS"
+        }
+      end
     else
       response = {
         text: "I couldn't find #{params[:list_name]} for James. Would you like to create one?",
