@@ -92,6 +92,7 @@ class List
       "".tap do |response|
         response << "The list for #{list.user.try(:name).try(:capitalize)} contains "
         response << list.list_items.map(&:name).join(", ")
+        response << ". Would you like a copy of this list?"
       end
     end
   end
