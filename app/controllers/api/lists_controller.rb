@@ -14,7 +14,7 @@ class Api::ListsController < ApiController
   end
 
   def create
-    list = List.create!(name: params[:name])
+    list = List.create!(name: params[:list_name])
     respond_to do |format|
       format.json { render json: create_response(list) }
     end
