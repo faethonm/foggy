@@ -60,7 +60,7 @@ class List
     def recommended_text
       "".tap do |response|
         response << "You don't have a list for #{query}, "
-        response << "but I found some from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
+        response << "but I found one from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
         response << "Do you want to see what they have?"
       end
     end
