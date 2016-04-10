@@ -36,6 +36,7 @@ module Response
     ''.tap do |response|
       response << "I've created the #{list.name} list. To add an item say: add item to #{list.name} list. "
       response << "For example: Add shoes to #{list.name}."
+    end
   end
 
   def list_item_create_text(list_item)
