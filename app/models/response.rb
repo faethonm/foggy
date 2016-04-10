@@ -3,8 +3,8 @@ module Response
 
   def list_found_text(run_query)
     ''.tap do |response|
-      response << 'I found a list for you. '
-      response << "Here are the items: #{run_query.first.list_items.map(&:name).join(', ')}"
+      response << "Here are the items on #{run_query.first.try(:name)}: "
+      response << "#{run_query.first.list_items.map(&:name).join(', ')}"
     end
   end
 
@@ -12,7 +12,7 @@ module Response
     ''.tap do |response|
       response << "You don't have a list for #{query}, "
       response << "but I found one from #{recommend_for_query.first.user.try(&:name).try(&:capitalize)}. "
-      response << 'Do you want to see what they have?'
+      response << 'Do you want to view theirs?'
     end
   end
 
@@ -22,7 +22,7 @@ module Response
 
   def show_text(list)
     ''.tap do |response|
-      response << "The list for #{list.user.try(:name).try(:capitalize)} contains "
+      response << "The #{list.name} list for #{list.user.try(:name).try(:capitalize)} contains: "
       response << list.list_items.map(&:name).join(", ")
       response << '. Would you like a copy of this list?'
     end
@@ -33,7 +33,9 @@ module Response
   end
 
   def list_create_text(list)
-    "I've created the #{list.name} list for you. To add an item say add item x to #{list.name} list"
+    ''.tap do |response|
+      response << "I've created the #{list.name} list. To add an item say: add item to #{list.name} list. "
+      response << "For example: Add shoes to #{list.name}."
   end
 
   def list_item_create_text(list_item)
