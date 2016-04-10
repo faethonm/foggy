@@ -12,13 +12,18 @@ class Api::ListItemsController < ApiController
 
   def add_to_basket
     list = current_user.lists.find_by(name: params[:list_name])
+    if list
+      list_item = list.list_items.find_by(name: params[:item_name])
 
-    list_item = list.list_items.find_by(name: params[:item_name])
+      list_item.update_attributes!(in_basket: true)
 
-    list_item.update_attributes!(in_basket: true)
-
-    respond_to do |format|
-      format.json { render json: add_to_basket_response(list_item), status: :created }
+      respond_to do |format|
+        format.json { render json: add_to_basket_response(list_item), status: :created }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: did_not_find, status: :not_found }
+      end
     end
   end
 
@@ -36,6 +41,14 @@ class Api::ListItemsController < ApiController
       text: Response.add_to_basket_text(list_item),
       status: "ADDED_TO_BASKET",
       id: list_item.list.id
+    }
+  end
+
+  def did_not_find
+    {
+      text: "I couldn't find #{params[:list_name]} for James.",
+      status: "NOT_FOUND",
+      id: 0
     }
   end
 end
