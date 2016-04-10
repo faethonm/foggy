@@ -22,8 +22,8 @@ class ListItem < ActiveRecord::Base
 
   scope :items_in_basket, -> () { where(in_basket: true) }
 
-  def toggle_basket
-    self.in_basket = !in_basket
+  def toggle_basket!
+    update_attributes!(in_basket: !in_basket)
   end
 
   private

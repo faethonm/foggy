@@ -25,16 +25,18 @@ class ListItemsController < ApplicationController
     if @list_item.save
       redirect_to @list
     else
-      render 'new'
+      redirect_to @list
     end
   end
 
   def destroy
-    @list_item.destroy
+    ListItem.find(params[:list_item_id]).destroy
     redirect_to request.referrer
   end
 
   def add_to_basket
+    ListItem.find(params[:id]).toggle_basket!
+    redirect_to request.referrer
   end
 
   private
