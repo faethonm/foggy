@@ -15,7 +15,10 @@ gem 'devise'
 gem 'figaro'
 gem 'rails_12factor'
 gem 'annotate'
-gem "administrate", "~> 0.1.2"
+gem 'administrate', '~> 0.1.2'
+gem 'faye'
+gem 'thin', require: false
+gem 'sync'
 
 group :development do
   gem 'web-console', '~> 2.0'

@@ -35,6 +35,6 @@ class User < ActiveRecord::Base
 
   private
   def downcase_name
-    self.name = name.downcase
+    self.name = name.try(:downcase)
   end
 end
