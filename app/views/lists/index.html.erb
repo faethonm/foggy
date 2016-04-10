@@ -1,15 +1,13 @@
 <script>
 $(document).on('ready page:load', function() {
+  if (window.location.pathname !== '/lists') {
+    return false;
+  }
   console.log('refresh')
     var REFRESH_INTERVAL_IN_MILLIS = 1000;
     setTimeout(function(){
-      
       Turbolinks.enableTransitionCache(true);
-
-      
       Turbolinks.visit(location.toString());
-
-      
       Turbolinks.enableTransitionCache(false);
     }, REFRESH_INTERVAL_IN_MILLIS);
 });
@@ -18,8 +16,10 @@ $(document).on('ready page:load', function() {
 // }, 1000);
 </script>
 <ul class="lists">
+  <div class="row">
   <% @lists.each do |list| %>
     <%= sync partial: 'list', resource: list %>
   <% end %>
+  </div>
 </ul>
 
