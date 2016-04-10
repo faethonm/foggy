@@ -1,4 +1,5 @@
 class Api::ListItemsController < ApiController
+  skip_before_filter :verify_authenticity_token
   def create
     list = User.find_by(email: "james@foggy.io").lists.find_by(name: params[:list_name])
 
