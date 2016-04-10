@@ -61,7 +61,7 @@ class List
 
     def none_response
       {
-        text: Response.none_text,
+        text: Response.none_text(query),
         status: STATUSES[:not_found]
       }
     end

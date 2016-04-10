@@ -16,8 +16,8 @@ module Response
     end
   end
 
-  def none_text
-    'I couldn\'t find any lists for you. Do you want to create a new one?'
+  def none_text(query)
+    "I couldn\'t find a #{query} list. Do you want to create one?"
   end
 
   def show_text(list)
