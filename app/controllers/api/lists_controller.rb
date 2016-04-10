@@ -14,7 +14,8 @@ class Api::ListsController < ApiController
   end
 
   def create
-    list = List.create!(name: params[:list_name])
+    user = User.find_by(email: "james@foggy.io")
+    list = List.create!(name: params[:list_name], user: user)
     respond_to do |format|
       format.json { render json: create_response(list) }
     end
