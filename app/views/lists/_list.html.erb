@@ -1,19 +1,39 @@
 <li id="list-<%= list.id %>">
-  <div class="container">
-    <h2 class="row center card-title"><%= list.name %>,<%= list.user.email %></h2>
-    <div class="row">
-      <div class="col s6 offset-s3">
-        <div class="card">
-          <div class="card-content">
-            <ul class="collection" >
-              <%= render list.list_items %>
-            </ul>
-            <div class="card-action">
-              <%= link_to 'View', list, class: "btn waves-effect waves-light" %>
-             </div>
-          </div>
-        </div>
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><%= list.name %>,<%= list.user.try(:email) %></span>
+        <ul class="collection" >
+          <%= render list.list_items %>
+        </ul>
+        <div class="card-action">
+          <%= link_to 'View', list, class: "btn waves-effect waves-light" %>
+        
+              <button data-target="add_item" class="btn modal-trigger">Add Item</button>
+              </div>
       </div>
     </div>
   </div>
 </li>
+<!-- Modal Structure -->
+<div id="add_item" class="modal">
+  <div class="modal-content">
+    <h4>Add an Item</h4>
+    <%= form_for(@list_item, url: new_list_items_path(list), html: { multipart: true}) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class='field'>
+        <%= f.text_field :name, placeholder: 'Add new item...', autofocus: true%>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit 'Add',  class: "modal-action modal-close waves-effect waves-green btn-flat " %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+</script>
