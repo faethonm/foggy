@@ -2,13 +2,15 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <span class="card-title"><%= list.name %>,<%= list.user.try(:email) %></span>
+        <div class="card-title">
+          <span><%= list.name %></span>
+          <span class="right"><%= list.user.try(:name) || list.user.try(:email) %></span>
+        </div>
         <ul class="collection" >
           <%= render list.list_items %>
         </ul>
         <div class="card-action">
           <%= link_to 'View', list, class: "btn waves-effect waves-light" %>
-        
               <button data-target="add_item" class="btn modal-trigger">Add Item</button>
               </div>
       </div>

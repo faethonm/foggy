@@ -15,8 +15,10 @@
 
 class ListsController < ApplicationController
   enable_sync only: [:create, :update, :destroy]
+  before_action :authenticate_user!
+
   def index
-    @lists = List.all.order(created_at: :desc)
+    @lists = current_user.lists.order(created_at: :desc)
     @list_item = ListItem.new
   end
 

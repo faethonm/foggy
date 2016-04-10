@@ -18,7 +18,7 @@
 <ul class="lists">
   <div class="row">
   <% @lists.each do |list| %>
-    <%= sync partial: 'list', resource: list %>
+    <%= render list %>
   <% end %>
   </div>
 </ul>
