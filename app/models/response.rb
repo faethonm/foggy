@@ -41,4 +41,8 @@ module Response
   def list_item_create_text(list_item)
     "I've added #{list_item.name} to #{list_item.list.name}."
   end
+
+  def add_to_basket_text(list_item)
+    "I've added #{list_item.name} from your list for #{list_item.list.name} to the basket!"
+  end
 end

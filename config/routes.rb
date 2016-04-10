@@ -13,12 +13,16 @@ Rails.application.routes.draw do
   namespace :api do
     resources :static, only: [:index]
     resources :lists, only: [:index, :show, :create, :update]
-    resources :list_items, only: [:create]
+    resources :list_items, only: [:create] do
+      collection do
+        post :add_to_basket
+      end
+    end
   end
 
   resources :lists do
     member do
-      resource :list_items do 
+      resource :list_items do
         member do
           get :add_to_basket
         end

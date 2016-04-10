@@ -20,7 +20,7 @@ class ListItem < ActiveRecord::Base
 
   before_save :downcase_name
 
-  score :items_in_basket, -> () { where(in_basket: true) }
+  scope :items_in_basket, -> () { where(in_basket: true) }
 
   def toggle_basket
     self.in_basket = !in_basket

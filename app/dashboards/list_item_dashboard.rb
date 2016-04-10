@@ -13,6 +13,7 @@ class ListItemDashboard < Administrate::BaseDashboard
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    in_basket: Field::Boolean,
   }
 
   # COLLECTION_ATTRIBUTES
@@ -35,6 +36,7 @@ class ListItemDashboard < Administrate::BaseDashboard
     :name,
     :created_at,
     :updated_at,
+    :in_basket
   ]
 
   # FORM_ATTRIBUTES
@@ -43,12 +45,13 @@ class ListItemDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :list,
     :name,
+    :in_basket
   ]
 
   # Overwrite this method to customize how list items are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(list_item)
-  #   "ListItem ##{list_item.id}"
-  # end
+
+  def display_resource(list_item)
+    "ListItem ##{list_item.name} from #{list_item.list.try(:name)} by #{list_item.list.try(:user).try(:name)}"
+  end
 end
