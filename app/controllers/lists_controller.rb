@@ -14,8 +14,9 @@
 #
 
 class ListsController < ApplicationController
+  enable_sync only: [:create, :update, :destroy]
   def index
-    @lists = List.all
+    @lists = List.all.order(created_at: :desc)
     @list_item = ListItem.new
   end
 
